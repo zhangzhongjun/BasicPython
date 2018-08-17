@@ -1,0 +1,113 @@
+open(name[,mode[buf]])
+	r：只读方式打开
+		文件必需存在
+	w：只写方式打开
+		文件不存在，则创建一个文件
+		文件存在，则将该文件的内容清除
+	a：追加方式打开
+		文件存在，则打开文件，并且将索引置于文件末尾
+		文件不存在，则创建文件
+	r+/w+：读写方式打开
+	a+：追加、读、写方式打开
+	
+
+读取文件的代码框架：
+	try:
+    f = open("f:\\test.txt","r")
+	（做一些事情）
+finally:
+    if f:
+        f.close()
+flush():
+	将对文件的更改写入文件
+close()：
+	1.将对文件的更改写入文件
+	2.关闭文件
+read()：
+	读取文件中的全部内容
+read(size)：
+	读取指定字节数的内容
+readline()：
+	读取一行
+readline(size)：
+设line = readline()
+	len(line)>size: 读取size个字节
+	len(line)<size: 读取一行
+readlines()：
+	以列表的方式返回文件中的所有行
+readlines(size)
+	import io
+	io.DEFAULT_BUFFER_SIZE
+	
+	
+使用迭代器读取文件：文件本身就是一个可以迭代的对象
+    i=0
+    for line in f:
+        print u"第"+str(i)+u"行:"+line
+        i += 1
+		
+write(str)
+write(sequence of string)
+	该方法并不会在每一行末尾加上 \n
+在写文件时，实质上是先写在写缓存中，然后再从写缓存写到文件中
+f.close() 将写缓存中的东西写入到文件中 并且关闭文件
+f.flush() 将写缓存中的东西写入到文件中
+
+f.tell() 返回文件指针当前位置
+f.seek(偏移量，参考位置) 将文件指针至于相对于参考位置的偏移量处
+	偏移量：可以为正值或者负值
+	参考位置：
+		os.SEEK_SET:文件的起始位置
+		os.SEEK_CUR:文件指针的当前位置
+		os.SEEK_END:文件的末尾位置
+
+file对象的属性
+	file.fileno 文件描述符
+	file.mode 文件打开权限
+	file.encoding 文件的编码格式
+	file.closed 文件是否关闭
+三个标准文件
+	sys.stdin 标准输入
+	sys.stdout标准输出
+	sys.stderr标准错误
+
+import os 使用os模块来使得你的代码更加的linux
+os.open(filename,flag,[,mode])
+	flag:
+		os.O_RDONLY	以只读的方式打开 Read only
+		os.O_WRONLY	以只写的方式打开 Write only
+		os.O_RDWR	以读写的方式打开 Read and write
+		os.O_APPEND	以追加的方式打开  
+		os.O_CREAT	创建并打开一个新文件
+		os.O_EXCL	os.O_CREAT| os.O_EXCL 如果指定的文件存在，返回错误
+		os.O_TRUNC	打开一个文件并截断它的长度为零（必须有写权限）
+os.access(path,mode)
+	mode:
+		F_OK 文件是否存在
+		R_OK 文件是否可读
+		W_OK 文件是否可写
+		X_OK 文件是否可执行
+os.read(fd,buffersize)
+os.write(fd,string)
+os.lseek(fd,pos,)
+os.makedir(path,[,mode])
+os.makedirs(path,[,mode]) 
+os.path模块
+os.path.listdir()
+#使用codecs模块
+import codecs
+f = codecs.open('F:\\test.txt','w','utf-8')
+f.write(u'张中俊')
+f.close
+
+
+3.关于编码一些建议
+
+3.1. 使用字符编码声明，并且同一工程中的所有源代码文件使用相同的字符编码声明。
+这点是一定要做到的。
+
+3.2. 抛弃str，全部使用unicode。
+按引号前先按一下u最初做起来确实很不习惯而且经常会忘记再跑回去补，但如果这么做可以减少90%的编码问题。如果编码困扰不严重，可以不参考此条。
+
+3.3. 使用codecs.open()替代内置的open()。
+如果编码困扰不严重，可以不参考此条。

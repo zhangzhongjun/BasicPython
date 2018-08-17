@@ -1,0 +1,10 @@
+soup = BeautifulSoup(html_doc,'html.parser',from_encoding='utf-8')
+
+完全匹配 class 的值时,如果CSS类名的顺序与实际不符,将搜索不到结果:
+soup.find_all("a", attrs={"class": "sister"})
+
+def has_six_characters(css_class):
+    return css_class is not None and len(css_class) == 6
+soup.find_all(class_=has_six_characters)
+
+node.contents
