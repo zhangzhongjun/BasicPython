@@ -1,5 +1,22 @@
-# Python点滴
-## 导包
+# python2和python3的区别
+
+```python
+#coding=utf-8
+
+#2.X中的字符串默认为byte，而3.X中的字符串默认为unicode
+#在字符串前面加上b，表示这是ascii编码；加上u，表示这是unicode编码
+#2.X中/将得到整数，//将得到浮点数
+#3.X中/将得到浮点数,//将得到整数
+
+from __future__ import division
+from __future__ import unicode_literals
+print 10/3
+print 10//3
+```
+
+
+# 导包
+
 3种不同的导包方式
 ```python
 from numpy import *
@@ -14,7 +31,8 @@ import numpy as np
 可以使用缩写，如np.mat()
 ```
 
-## range和xrange
+# range和xrange
+
 ```python
 for i in range(1000):
 	pass
@@ -26,7 +44,9 @@ for i in xrange(1000):
 ```
 则不会生成一个 1000 个元素的 List，而是在每次迭代中返回下一个数值，内存空间占用很小。因为 xrange 不返回 List，而是返回一个 iterable 对象。
 
-## 路径问题
+
+# 路径问题
+
 ```python
 # 获取当前文件__file__的路径
 print ("os.path.realpath(__file__)=%s" % os.path.realpath(__file__))
@@ -56,7 +76,8 @@ path = path.join(d, "alice_mask.png")
 
 ```
 
-## 下载小文件 图片等
+# 下载小文件 图片等
+
 ```python
 import requests
 response = requests.get(url)
@@ -66,7 +87,7 @@ with open(p,'wb') as ft:
   ft.close
 ```
 
-## 清洗掉Windows系统非法文件夹名字
+# 清洗掉Windows系统非法文件夹名字
 
 ```python
 def strip(path):
@@ -78,7 +99,8 @@ def strip(path):
     return path
 ```
 
-## 判断平台
+# 判断平台
+
 ```python
 #换行符：都使用\n就可以了，windows平台会自动的进行转化
 my_os = platform.system()
@@ -93,7 +115,8 @@ else:
     print("you are in linux")
 ```
 
-## 画图工具
+# 画图工具
+
 ```python
 #先加载画图需要用的包
 import matplotlib as mpl
@@ -109,24 +132,30 @@ plt.show()
 
 ```
 
-
-## 换行符问题
+# 换行符问题
 直接使用`\n`，windows会帮你替换为`\r\n`
 
-## 依赖
+# 依赖
+
 1. 安装pipreqs
   `pip install pipreqs`
 2. 进入项目所在的目录，生成requirements.txt文件
   `pipreqs --encoding utf-8 --force  ./`
 3. 使用requirements.txt文件
   `pip install -r requirements.txt`
-## pip源
+
+# pip源
 ```cmd
 pip install web.py -i https://pypi.tuna.tsinghua.edu.cn/simple
 -i https://linux.xidian.edu.cn/mirrors/pypi/web/simple/
 ```
-## scrapy
+
+# scrapy
+
+> 参考我的另外一个仓库：https://github.com/zhangzhongjun/Crawler-ScrapyLearn
+
 文档：https://docs.scrapy.org/en/latest/topics/commands.html
+
 创建项目
 ```cmd
 scrapy startproject tutorial
