@@ -1,6 +1,8 @@
+
+```python
 # coding=utf-8
 #!/usr/bin/python
-
+```
 
 # 定义一个新的list
 
